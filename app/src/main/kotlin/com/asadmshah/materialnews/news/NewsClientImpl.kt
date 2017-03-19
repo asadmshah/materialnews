@@ -17,6 +17,13 @@ internal class NewsClientImpl @Inject constructor(private val endpoints: Endpoin
         private val JSON_MAPPER = jacksonObjectMapper()
         private val JSON_WRITER = JSON_MAPPER.writerFor(Response::class.java)
         private val JSON_READER = JSON_MAPPER.readerFor(Response::class.java)
+
+        private val PUBLISHERS = arrayOf(
+                Publisher("Ars Technica", "ars-technica", 0),
+                Publisher("BBC News", "bbc-news", 0),
+                Publisher("BuzzFeed", "buzzfeed", 0),
+                Publisher("ESPN", "espn", 0)
+        )
     }
 
     override fun get(publisher: Publisher): Observable<Pair<Publisher, List<Article>>> {
@@ -36,9 +43,9 @@ internal class NewsClientImpl @Inject constructor(private val endpoints: Endpoin
                 .map { publisher to it.articles }
     }
 
-    override fun get(vararg publishers: Publisher): Observable<Pair<Publisher, List<Article>>> {
+    override fun get(): Observable<Pair<Publisher, List<Article>>> {
         return Observable
-                .defer { Observable.fromArray(*publishers) }
+                .defer { Observable.fromArray(*PUBLISHERS) }
                 .flatMap { get(it) }
     }
 

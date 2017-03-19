@@ -12,13 +12,6 @@ import timber.log.Timber
 
 class MainPresenter(private val view: MainContract.View, private val component: PresenterComponent) : MainContract.Presenter {
 
-    val publishers = arrayOf(
-            Publisher("Ars Technica", "ars-technica", 0),
-            Publisher("BBC News", "bbc-news", 0),
-            Publisher("BuzzFeed", "buzzfeed", 0),
-            Publisher("ESPN", "espn", 0)
-    )
-
     val client: NewsClient by lazy { component.newsClient() }
     val schedulers: Schedulers by lazy { component.schedulers() }
 
@@ -46,7 +39,7 @@ class MainPresenter(private val view: MainContract.View, private val component: 
     }
 
     fun requestContent() {
-        client.get(*publishers)
+        client.get()
                 .subscribeOn(schedulers.io())
                 .observeOn(schedulers.main())
                 .toList()

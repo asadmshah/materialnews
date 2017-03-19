@@ -8,6 +8,6 @@ interface NewsClient {
 
     fun get(publisher: Publisher): Observable<Pair<Publisher, List<Article>>>
 
-    fun get(vararg publishers: Publisher): Observable<Pair<Publisher, List<Article>>>
+    fun get(): Observable<Pair<Publisher, List<Article>>>
 
 }
