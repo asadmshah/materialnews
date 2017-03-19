@@ -1,7 +1,6 @@
 package com.asadmshah.materialnews.screens.main
 
 import android.os.Bundle
-import android.util.Log
 import com.asadmshah.materialnews.models.Article
 import com.asadmshah.materialnews.models.Publisher
 import com.asadmshah.materialnews.news.NewsClient
@@ -9,18 +8,22 @@ import com.asadmshah.materialnews.schedulers.Schedulers
 import com.asadmshah.materialnews.screens.base.PresenterComponent
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
+import timber.log.Timber
 
-internal class MainPresenter(private val view: MainContract.View, private val component: PresenterComponent) : MainContract.Presenter {
+class MainPresenter(private val view: MainContract.View, private val component: PresenterComponent) : MainContract.Presenter {
 
-    private val publishers = arrayOf(
+    val publishers = arrayOf(
             Publisher("Ars Technica", "ars-technica", 0),
-            Publisher("BBC News", "bbc-news", 0)
+            Publisher("BBC News", "bbc-news", 0),
+            Publisher("BuzzFeed", "buzzfeed", 0),
+            Publisher("ESPN", "espn", 0)
     )
 
-    private val client: NewsClient by lazy { component.newsClient() }
-    private val schedulers: Schedulers by lazy { component.schedulers() }
+    val client: NewsClient by lazy { component.newsClient() }
+    val schedulers: Schedulers by lazy { component.schedulers() }
 
-    private var newsDisposable: Disposable? = null
+    var newsDisposable: Disposable? = null
+    var content: List<Pair<Publisher, List<Article>>>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         requestContent()
@@ -34,6 +37,14 @@ internal class MainPresenter(private val view: MainContract.View, private val co
         newsDisposable?.dispose()
     }
 
+    override fun getPublishersCount(): Int {
+        return content?.size ?: 0
+    }
+
+    override fun getPageContent(position: Int): Pair<Publisher, List<Article>> {
+        return content?.get(position)!!
+    }
+
     fun requestContent() {
         client.get(*publishers)
                 .subscribeOn(schedulers.io())
@@ -41,19 +52,23 @@ internal class MainPresenter(private val view: MainContract.View, private val co
                 .toList()
                 .subscribe(object : SingleObserver<MutableList<Pair<Publisher, List<Article>>>> {
                     override fun onSuccess(response: MutableList<Pair<Publisher, List<Article>>>) {
-                        Log.d("MainPresenter", "Received ${response.size}")
+                        Timber.d("Received ${response.size}")
+
+                        content = response
+                        view.setAdapter()
                     }
 
                     override fun onError(e: Throwable) {
-                        newsDisposable = null
+                        Timber.e(e)
 
-                        e.printStackTrace()
+                        newsDisposable = null
                     }
 
                     override fun onSubscribe(d: Disposable) {
+                        Timber.d("onSubscribe")
+
                         newsDisposable = d
                     }
                 })
     }
-
 }

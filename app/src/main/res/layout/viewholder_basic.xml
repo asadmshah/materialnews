@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="@color/md_yellow_100"
+    >
+
+    <ImageView
+        android:id="@+id/article_image"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentEnd="true"
+        android:scaleType="centerCrop"
+        tools:src="@color/md_red_500"
+        />
+
+    <TextView
+        android:id="@+id/article_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginStart="8dp"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/black_primary_text"
+        android:textSize="16sp"
+        android:maxLines="4"
+        android:ellipsize="end"
+        tools:text="Surface Books Is The Laptop Microsoft Needed Years Ago"
+        />
+
+    <TextView
+        android:id="@+id/article_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="128dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/article_title"
+        android:textColor="@color/black_secondary_text"
+        android:textSize="12sp"
+        android:maxLines="4"
+        android:ellipsize="end"
+        tools:text="January 1, 2017"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black_dividers"
+        />
+
+</RelativeLayout>

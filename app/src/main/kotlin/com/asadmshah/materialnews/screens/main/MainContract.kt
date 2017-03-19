@@ -1,14 +1,28 @@
 package com.asadmshah.materialnews.screens.main
 
-import com.asadmshah.materialnews.screens.base.BasePresenter
+import android.os.Bundle
+import com.asadmshah.materialnews.models.Article
+import com.asadmshah.materialnews.models.Publisher
 
-internal interface MainContract {
+interface MainContract {
 
     interface View {
 
+        fun setToolbarTitle(title: String)
+
+        fun setAdapter()
     }
 
-    interface Presenter : BasePresenter {
+    interface Presenter {
 
+        fun onCreate(savedInstanceState: Bundle?)
+
+        fun onSaveInstanceState(outState: Bundle)
+
+        fun onDestroy()
+
+        fun getPublishersCount(): Int
+
+        fun getPageContent(position: Int): Pair<Publisher, List<Article>>
     }
 }

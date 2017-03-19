@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty
 @JsonIgnoreProperties(ignoreUnknown = true)
 internal class Response {
 
-    @JsonProperty("articles") lateinit var articles: List<Article>
+    @JsonProperty("articles")
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    lateinit var articles: List<Article>
 
 }

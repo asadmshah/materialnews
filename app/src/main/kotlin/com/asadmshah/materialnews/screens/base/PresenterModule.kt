@@ -6,12 +6,12 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class PresenterModule (private val activity: BaseActivity) {
+class PresenterModule (private val context: Context) {
 
     @Provides
     @PresenterScope
     fun context(): Context {
-        return activity
+        return context
     }
 
 }

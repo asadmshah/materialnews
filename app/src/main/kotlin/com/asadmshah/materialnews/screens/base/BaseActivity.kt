@@ -13,4 +13,8 @@ abstract class BaseActivity : AppCompatActivity() {
                 .build()
     }
 
+    inline protected fun <reified T> findView(id: Int): T {
+        return findViewById(id) as T
+    }
+
 }
