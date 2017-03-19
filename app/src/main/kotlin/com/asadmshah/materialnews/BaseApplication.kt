@@ -2,6 +2,7 @@ package com.asadmshah.materialnews
 
 import android.app.Application
 import android.content.Context
+import timber.log.Timber
 
 class BaseApplication : Application() {
 
@@ -17,6 +18,14 @@ class BaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        prepareLogger()
+    }
+
+    private fun prepareLogger() {
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
 
 }
