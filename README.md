@@ -2,6 +2,12 @@
 
 Application based on [this post](https://material.uplabs.com/posts/news-app-4b47c474-3bfb-4f75-872c-70c26637f25c).
 
+![Original](assets/src.gif)
+
+Unfortunately, gave up at this point:
+
+![Abomination](assets/dst.gif)
+
 # License
 Copyright (C) 2017 Asad Shah
 
