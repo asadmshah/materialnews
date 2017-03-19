@@ -24,5 +24,7 @@ interface MainContract {
         fun getPublishersCount(): Int
 
         fun getPageContent(position: Int): Pair<Publisher, List<Article>>
+
+        fun onPageSelected(position: Int)
     }
 }

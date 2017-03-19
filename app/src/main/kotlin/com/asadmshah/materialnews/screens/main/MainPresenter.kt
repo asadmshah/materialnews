@@ -38,6 +38,12 @@ class MainPresenter(private val view: MainContract.View, private val component: 
         return content?.get(position)!!
     }
 
+    override fun onPageSelected(position: Int) {
+        content?.let {
+            view.setToolbarTitle(it[position].first.name)
+        }
+    }
+
     fun requestContent() {
         client.get()
                 .subscribeOn(schedulers.io())
@@ -49,6 +55,7 @@ class MainPresenter(private val view: MainContract.View, private val component: 
 
                         content = response
                         view.setAdapter()
+                        view.setToolbarTitle(response[0].first.name)
                     }
 
                     override fun onError(e: Throwable) {

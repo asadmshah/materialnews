@@ -3,6 +3,7 @@ package com.asadmshah.materialnews.screens.page
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -25,6 +26,7 @@ class PageView(context: Context, publisher: Publisher, articles: List<Article>) 
     val viewList by lazy { findView<RecyclerView>(R.id.recycler_view) }
     val viewIcon by lazy { findView<ImageView>(R.id.up_arrow) }
     val viewLazy by lazy { findView<View>(R.id.lazy_white) }
+    val viewToolbar by lazy { findView<Toolbar>(R.id.toolbar) }
 
     val presenter: PageContract.Presenter
     var adapter: Adapter? = null
@@ -53,6 +55,8 @@ class PageView(context: Context, publisher: Publisher, articles: List<Article>) 
                 viewBlur.scaleY = 1+y*0.5f
 
                 viewLazy.alpha = y*1.25f
+
+                viewToolbar.alpha = y*1.25f
             }
         })
 

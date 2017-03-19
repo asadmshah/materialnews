@@ -47,4 +47,14 @@
         android:src="@drawable/ic_keyboard_arrow_up_white_24dp"
         />
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        android:background="?attr/colorPrimary"
+        android:alpha="0"
+        style="@style/Toolbar"
+        />
+
 </merge>
