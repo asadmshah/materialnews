@@ -7,6 +7,6 @@ import dagger.Component
 
 @PresenterScope
 @Component(dependencies = arrayOf(BaseComponent::class), modules = arrayOf(PresenterModule::class))
-interface PresenterComponent {
+interface PresenterComponent : BaseComponent {
     fun context(): Context
 }

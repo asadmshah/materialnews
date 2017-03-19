@@ -20,11 +20,19 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        buildTypes.each {
+            it.buildConfigField 'String', 'NEWS_KEY', "\"${rootProject.ext.newsKey}\""
+        }
     }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
         test.java.srcDirs += 'src/test/kotlin'
+    }
+
+    packagingOptions {
+        pickFirst 'META-INF/LICENSE'
     }
 }
 
@@ -43,8 +51,15 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     compile 'com.google.dagger:dagger:2.9'
     kapt    'com.google.dagger:dagger-compiler:2.9'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:converter-jackson:2.2.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+    compile 'com.squareup.okhttp3:okhttp:3.6.0'
+    compile 'io.reactivex.rxjava2:rxjava:2.0.7'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
     testCompile 'junit:junit:4.12'
+
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })

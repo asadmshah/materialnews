@@ -2,7 +2,7 @@ package com.asadmshah.materialnews.screens.main
 
 import com.asadmshah.materialnews.screens.base.BasePresenter
 
-interface MainContract {
+internal interface MainContract {
 
     interface View {
 
